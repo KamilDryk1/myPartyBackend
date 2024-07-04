@@ -38,7 +38,7 @@ class User {
 
 			return e.message;
 		}
-	};
+	}
 
 	async getUser() {
 		const users = await getJsonData('data/users.json');
@@ -50,13 +50,13 @@ class User {
 		}
 
 		return user;
-	};
+	}
 
 	getLastId(users) {
 		return users.reduce((maxObj, currentObj) => {
 			return currentObj.id > maxObj ? currentObj.id : maxObj;
 		}, users[0].id);
 	}
-};
+}
 
 exports.User = User;

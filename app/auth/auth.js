@@ -1,4 +1,4 @@
-const fs = require('node:fs/promises');
+const md5 = require('md5');
 
 const { getJsonData } = require('../util/util');
 
@@ -24,6 +24,10 @@ class Auth {
 		if (user.email === this.email && user.password === this.password) {
 			return true;
 		}
+	}
+
+	generateToken(user) {
+		
 	}
 }
 

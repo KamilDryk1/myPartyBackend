@@ -15,6 +15,11 @@ function isArrayContainsValue(array, key, value) {
 	return array.some(obj => obj[key] === value);
 }
 
+function getObjectFromArray(array, key, value) {
+	return array.find(obj => obj[key] === value);
+}
+
 exports.getJsonData = getJsonData;
 exports.writeJsonData = writeJsonData;
 exports.isArrayContainsValue = isArrayContainsValue;
+exports.getObjectFromArray = getObjectFromArray;

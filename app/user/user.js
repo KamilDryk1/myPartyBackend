@@ -1,4 +1,4 @@
-const { getJsonData, writeJsonData, isArrayContainsValue } = require('../util/util');
+const { getJsonData, writeJsonData, isArrayContainsValue, getObjectFromArray } = require('../util/util');
 
 class User {
 
@@ -40,8 +40,16 @@ class User {
 		}
 	};
 
-	async getUser() {
-		
+	async getUser(email) {
+		const users = await getJsonData('data/users.json');
+
+		const user = getObjectFromArray(users.users, 'email', email);
+
+		if (!user) {
+			return;
+		}
+
+		return user;
 	};
 
 	getLastId(users) {

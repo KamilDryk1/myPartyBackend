@@ -16,19 +16,19 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.post('/auth', async (req, res) => {
-	const credentials = req.body;
+// app.post('/auth', async (req, res) => {
+// 	const credentials = req.body;
 
-	const auth = new Auth(credentials)
+// 	const auth = new Auth(credentials)
 
-	// const token = await auth(credentials);
+// 	// const token = await auth(credentials);
 
-	if (token) {
-		res.status(200).json({ token: token })
-	} else {
-		res.status(403).json({ message: "Invalid credentials or user doesn't exist!" })
-	}
-});
+// 	if (token) {
+// 		res.status(200).json({ token: token })
+// 	} else {
+// 		res.status(403).json({ message: "Invalid credentials or user doesn't exist!" })
+// 	}
+// });
 
 app.post('/user/create', async (req, res) => {
 	const userData = req.body;
@@ -50,13 +50,27 @@ app.post('/user/get', async (req, res) => {
 	const emailObj = req.body;
 
 	const newUser = new User(emailObj);
-	const user = await newUser.getUser(emailObj.email);
+	const user = await newUser.getUser();
 
 	if (user) {
 		res.status(200).json(user)
 	} else {
 		res.status(404).json({ message: 'User doesn\'t exist!' })
 	}
-})
+});
+
+app.post('/auth', async (req, res) => {
+	const credentials = req.body;
+
+	const auth = new Auth(credentials);
+
+	const result = await auth.authUser();
+
+	if (result) {
+		res.status(200).json({ message: 'Succes!' })
+	} else {
+		res.status(403).json({ message: 'Wrong credentials!' })
+	}
+});
 
 app.listen(8080);

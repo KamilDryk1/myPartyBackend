@@ -40,10 +40,10 @@ class User {
 		}
 	};
 
-	async getUser(email) {
+	async getUser() {
 		const users = await getJsonData('data/users.json');
 
-		const user = getObjectFromArray(users.users, 'email', email);
+		const user = getObjectFromArray(users.users, 'email', this.data.email);
 
 		if (!user) {
 			return;

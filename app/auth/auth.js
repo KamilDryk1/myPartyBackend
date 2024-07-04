@@ -1,6 +1,9 @@
 const fs = require('node:fs/promises');
 
-const { getJsonData } = require('../util/util')
+const { getJsonData } = require('../util/util');
+
+const { User } = require("../user/user");
+
 
 class Auth {
 
@@ -11,7 +14,16 @@ class Auth {
 	}
 
 	async authUser() {
+		const newUser = new User({email: this.email, password: this.password});
+		const user = await newUser.getUser();
 
+		if (!user) {
+			return false;
+		}
+
+		if (user.email === this.email && user.password === this.password) {
+			return true;
+		}
 	}
 }
 

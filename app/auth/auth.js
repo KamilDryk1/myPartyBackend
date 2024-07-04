@@ -27,7 +27,10 @@ class Auth {
 	}
 
 	generateToken(user) {
-		
+		const timestamp = new Date.now();
+		const token = md5(user.email + user.id + user.birthYear + timestamp);
+
+		this.token = token;
 	}
 }
 

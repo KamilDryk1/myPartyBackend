@@ -14,7 +14,8 @@ class User {
 			password: this.data.password,
 			birthYear: this.data.birthYear,
 			rates: [],
-			activeEvents: []
+			activeEvents: [],
+			token: null
 		};
 
 		try {
@@ -50,6 +51,27 @@ class User {
 		}
 
 		return user;
+	}
+
+	async updateUser(key, value) {
+		const users = await getJsonData('data/users.json');
+		const usersArray = users.users;
+
+		const user = getObjectFromArray(usersArray, "email", this.data.email);
+
+		user[key] = value;
+
+		const newUsersArray = usersArray.map((obj) => {
+			if (obj.email === this.data.email) {
+				return obj = user;
+			} else {
+				return obj;
+			}
+		});
+
+		users.users = newUsersArray;
+
+		writeJsonData('data/users.json', users);
 	}
 
 	getLastId(users) {

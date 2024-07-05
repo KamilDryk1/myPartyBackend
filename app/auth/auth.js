@@ -22,12 +22,16 @@ class Auth {
 		}
 
 		if (user.email === this.email && user.password === this.password) {
-			return true;
+			this.generateToken(user);
+
+			await newUser.updateUser('token', this.token);
+
+			return this.token;
 		}
 	}
 
 	generateToken(user) {
-		const timestamp = new Date.now();
+		const timestamp = Date.now();
 		const token = md5(user.email + user.id + user.birthYear + timestamp);
 
 		this.token = token;

@@ -24,6 +24,7 @@ class Auth {
 		if (user.email === this.email && user.password === this.password) {
 			this.generateToken(user);
 
+			// Adding token to user's data
 			await newUser.updateUser('token', this.token);
 
 			return this.token;

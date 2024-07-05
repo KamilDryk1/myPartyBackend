@@ -16,20 +16,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-// app.post('/auth', async (req, res) => {
-// 	const credentials = req.body;
-
-// 	const auth = new Auth(credentials)
-
-// 	// const token = await auth(credentials);
-
-// 	if (token) {
-// 		res.status(200).json({ token: token })
-// 	} else {
-// 		res.status(403).json({ message: "Invalid credentials or user doesn't exist!" })
-// 	}
-// });
-
 app.post('/user/create', async (req, res) => {
 	const userData = req.body;
 
